@@ -78,6 +78,9 @@ def main():
 		if boxx != None and boxy != None:
 			if not revealedBoxes[boxx][boxy]:
 				drawHighlightBox(boxx, boxy)
+			if not revealedBoxes[boxx][boxy] and mouseClicked:
+				revealBoxesAnimation(mainBoard, [(boxx, boxy)])
+				revealedBoxes[boxx][boxy]	
 
 
 
