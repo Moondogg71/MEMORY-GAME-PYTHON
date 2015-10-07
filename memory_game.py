@@ -50,3 +50,41 @@ def main():
 	mousey = 0
 	pygame.display.set_caption('Memory Game')
 
+	mainBoard = getRandomizedBoard()
+	revealedBoxes = generateRevealedBoxesData(False)
+
+	firstSelection = None #Stores X, Y of first box clicked
+
+	DISPLAYSURF.fill(BGCOLOR)
+	startGameAnimation(mainBoard)
+
+	while True:
+		mouseclicked = False
+
+		DISPLAYSURF.fill(BGCOLOR)#drawing the window
+		drawBoard(mainBoard, revealedBoxes)
+
+		for event in pygame.event.get(): #event handling loop
+			if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
+				pygame.quit()
+				sys.exit()
+			elif event.type == MOUSEMOTION:
+				mousex, mousey = event.pos
+			elif event.type == MOUSEBUTTONUP:
+				mousex, mousey = event.pos
+				mouseClicked = True	
+
+		boxx, boxy = getBoxAtPixel(mousex, mousey)
+		if boxx != None and boxy != None:
+			if not revealedBoxes[boxx][boxy]:
+				drawHighlightBox(boxx, boxy)
+
+
+
+
+
+
+
+
+
+
